@@ -83,6 +83,7 @@ importers:
       prettier-plugin-organize-imports: ^2.3.4
       react: ^17.0.2
       react-bootstrap: ^2.2.1
+      react-canvas-draw: ^1.2.1
       react-cookies: ^0.1.1
       react-dom: ^17.0.2
       react-icons: ^4.3.1
@@ -106,6 +107,7 @@ importers:
       postcss: 8.4.13
       react: 17.0.2
       react-bootstrap: 2.3.1_sfoxds7t5ydpegc3knd667wn6m
+      react-canvas-draw: 1.2.1_react@17.0.2
       react-cookies: 0.1.1
       react-dom: 17.0.2_react@17.0.2
       react-icons: 4.3.1_react@17.0.2
@@ -3776,6 +3778,10 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
+  /catenary-curve/1.0.1:
+    resolution: {integrity: sha512-vSHQtYFjItV4wxUH5OkicA3Kmln6thBBWlJLiw2f4apfvkKw4BVe8bTbG6lnbJe60CIr8PyHzjSX27blSJ07Ww==}
+    dev: false
+
   /chalk/2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
     engines: {node: '>=4'}
@@ -7172,6 +7178,10 @@ packages:
       package-json: 6.5.0
     dev: true
 
+  /lazy-brush/1.0.1:
+    resolution: {integrity: sha512-xT/iSClTVi7vLoF8dCWTBhCuOWqsLXCMPa6ucVmVAk6hyNCM5JeS1NLhXqIrJktUg+caEYKlqSOUU4u3cpXzKg==}
+    dev: false
+
   /leven/3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
     engines: {node: '>=6'}
@@ -9034,6 +9044,18 @@ packages:
       warning: 4.0.3
     dev: false
 
+  /react-canvas-draw/1.2.1_react@17.0.2:
+    resolution: {integrity: sha512-mCHE+Q91a26gUhyraHONedmbCI7dF/4BKdOxba7s4538QNfFWv/NfzLXWZrmjAQ4tO1vTvO+axX5YGIFjGc6uw==}
+    peerDependencies:
+      react: 16.x || 17.x
+    dependencies:
+      catenary-curve: 1.0.1
+      lazy-brush: 1.0.1
+      prop-types: 15.8.1
+      react: 17.0.2
+      resize-observer-polyfill: 1.5.1
+    dev: false
+
   /react-cookies/0.1.1:
     resolution: {integrity: sha512-PP75kJ4vtoHuuTdq0TAD3RmlAv7vuDQh9fkC4oDlhntgs9vX1DmREomO0Y1mcQKR9nMZ6/zxoflaMJ3MAmF5KQ==}
     dependencies:
@@ -9459,6 +9481,10 @@ packages:
 
   /reselect/4.1.5:
     resolution: {integrity: sha512-uVdlz8J7OO+ASpBYoz1Zypgx0KasCY20H+N8JD13oUMtPvSHQuscrHop4KbXrbsBcdB9Ds7lVK7eRkBIfO43vQ==}
+    dev: false
+
+  /resize-observer-polyfill/1.5.1:
+    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
     dev: false
 
   /resolve-cwd/3.0.0:
