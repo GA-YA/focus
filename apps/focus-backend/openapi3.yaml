@@ -1,0 +1,431 @@
+openapi: 3.0.1
+info:
+    title: focus-videos-api
+    description: ''
+    version: 1.0.0
+    license:
+        name: MIT
+        url: https://opensource.org/licenses/MIT
+paths:
+    /api/register:
+        post:
+            tags:
+                - authentication
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/register'
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/user'
+                400:
+                    description: BAD REQUEST
+                    content:
+                        application/json::
+                            schema:
+                                $ref: '#/components/schemas/error'
+    /api/login:
+        post:
+            tags:
+                - authentication
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/login'
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/user'
+                400:
+                    description: BAD REQUEST
+                    content:
+                        application/json::
+                            schema:
+                                $ref: '#/components/schemas/error'
+    /api/logout:
+        post:
+            tags:
+                - authentication
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/user'
+                400:
+                    description: BAD REQUEST
+                    content:
+                        application/json::
+                            schema:
+                                $ref: '#/components/schemas/error'
+    /api/users:
+        get:
+            tags:
+                - users
+            summary: get array of all users
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/users'
+    /api/users/{userId}:
+        get:
+            parameters:
+                - $ref: '#/components/parameters/userIdParam'
+            tags:
+                - users
+            summary: get user by userId
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/user'        
+    /api/users/friends/{userId}:
+        get:
+            tags:
+                - users
+            summary: get all user friends
+            parameters:
+                - $ref: '#/components/parameters/userIdParam'
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/users'
+        post:
+            tags:
+                - users
+            summary: add userId as a friend
+            parameters:
+                - $ref: '#/components/parameters/userIdParam'
+            responses:
+                200:
+                    description: OK
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: CREATED
+    /api/videos/all/{userId}:
+        get:
+            parameters:
+                - $ref: '#/components/parameters/userIdParam'
+            tags:
+                - videos
+            summary: get all user video
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/videos'
+    /api/videos/{videoId}:
+        get:
+            parameters:
+                - $ref: '#/components/parameters/videoIdParam'
+            tags:
+                - videos
+            summary: get video
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/video'
+        delete:
+            parameters:
+                - $ref: '#/components/parameters/videoIdParam'
+            tags:
+                - videos
+            summary: delete video
+            responses:
+                200:
+                    description: OK
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: OK
+    /api/videos:
+        post:
+            tags:
+                - videos
+            summary: upload video
+            requestBody:
+                content:
+                    multipart/form-data:
+                        schema:
+                            type: object
+                            properties:
+                                video:
+                                    format: binary
+                                description:
+                                    format: text
+            responses:
+                200:
+                    description: CREATED
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: CREATED
+    /api/videos/comments/{videoId}:
+        post:
+            tags:
+                - videos-comments
+            summary: add comment to video
+            parameters:
+                - $ref: '#/components/parameters/videoIdParam'
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/commentBody'
+            responses:
+                200:
+                    description: CREATED
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/comment'
+    /api/videos/comments/{commentId}:
+        get:
+            tags:
+                - videos-comments
+            summary: get comment by commentId
+            parameters:
+                - $ref: '#/components/parameters/commentIdParam'
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/comment'
+        delete:
+            tags:
+                - videos-comments
+            summary: delete comment by commentId
+            parameters:
+                - $ref: '#/components/parameters/commentIdParam'
+            responses:
+                200:
+                    description: OK
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: OK
+    /api/videos/likes/{videoId}:
+        post:
+            tags:
+                - videos-likes
+            summary: add like to video
+            parameters:
+                - $ref: '#/components/parameters/videoIdParam'
+            responses:
+                200:
+                    description: OK
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: OK
+        delete:
+            tags:
+                - videos-likes
+            summary: remove like from video
+            parameters:
+                - $ref: '#/components/parameters/videoIdParam'
+            responses:
+                200:
+                    description: OK
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: OK
+    /api/videos/stream/{userId}/{videoId}:
+        post:
+            tags:
+                - videos-streaming
+            summary: steam video
+            parameters:
+                - $ref: '#/components/parameters/userIdParam'
+                - $ref: '#/components/parameters/videoIdParam'
+            responses:
+                206:
+                    description: Partial Content
+                    content:
+                        video/mp4:
+                            schema:
+                                format: binary
+components:
+    schemas:
+        register:
+            type: object
+            properties:
+                userName:
+                    type: string
+                firstName:
+                    type: string
+                lastName:
+                    type: string
+                password:
+                    type: string
+                email:
+                    type: string
+                birth:
+                    type: string
+            required:
+                - 'userName'
+                - 'firstName'
+                - 'lastName'
+                - 'password'
+                - 'email'
+                - 'birth'
+        login:
+            type: object
+            properties:
+                email:
+                    type: string
+                password:
+                    type: string
+            required:
+                - 'email'
+                - 'password'
+        user:
+            type: object
+            properties:
+                id:
+                    type: string
+                fname:
+                    type: string
+                lname:
+                    type: string
+                email:
+                    type: string
+                birth:
+                    type: string
+                picture:
+                    type: string
+                videos:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/video'
+                friends:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/friend'
+        friend:
+            type: object
+            properties:
+                id:
+                    type: string
+                fname:
+                    type: string
+                lname:
+                    type: string
+                picture:
+                    type: string
+        video:
+            type: object
+            properties:
+                id:
+                    type: string
+                date:
+                    type: integer
+                url:
+                    type: string
+                likes:
+                    type: array
+                    items:
+                        type: string
+                        example: '123-123-123-123'
+                        description: userId
+                comments:
+                    type: array
+                    items:
+                        type: string
+                        example: '123-123-123-123'
+                        description: commentId
+        videos:
+            type: array
+            items:
+                $ref: '#/components/schemas/video'
+        users:
+            type: array
+            items:
+                $ref: '#/components/schemas/user'
+        comment:
+            type: object
+            properties:
+                id:
+                    type: string
+                fromUserId:
+                    type: string
+                toUserId:
+                    type: string
+                fromUserName:
+                    type: string
+                videoId:
+                    type: string
+                text:
+                    type: string
+                date:
+                    type: string
+        commentBody:
+            type: object
+            properties:
+                toUserId:
+                    type: string
+                text:
+                    type: string
+        like:
+            type: string
+            example: 111-111-111
+            description: userId
+        error:
+            type: object
+            required:
+                - message
+            properties:
+                message:
+                    type: string
+    parameters:
+        videoIdParam:
+            name: videoId
+            in: path
+            required: true
+            schema:
+                type: string
+        userIdParam:
+            name: userId
+            in: path
+            required: true
+            schema:
+                type: string
+        commentIdParam:
+            name: commentId
+            in: path
+            required: true
+            schema:
+                type: string

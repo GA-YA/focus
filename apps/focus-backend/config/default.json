@@ -1,0 +1,28 @@
+{
+    "openapiConfig": {
+        "filePath": "./openapi3.yaml",
+        "basePath": "/docs"
+    },
+    "server": {
+        "port": "80"
+    },
+    "db": {
+        "uri": "mongodb+srv://<username>:<password>@focus-mongo-cluster.sv6cm.mongodb.net/<dbName>?retryWrites=true&w=majority",
+        "dbname": "focus",
+        "username": "root",
+        "password": "db-focus-pass"
+    },
+    "videos": {
+        "urlBase": "http://localhost/api/videos/stream/"
+    },
+    "users": {
+        "profilePicPath": "http://localhost/api/users/picture"
+    },
+    "uploads": {
+        "path": "src/uploads/"
+    },
+    "auth": {
+        "tokenKey": "TEMP_TOKEN_KEY",
+        "sessionSecret": "thisismysecrctekeyfhrgfgrfrty84fwir767"
+    }
+}
