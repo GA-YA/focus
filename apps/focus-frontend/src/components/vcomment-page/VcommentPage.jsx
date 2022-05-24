@@ -5,6 +5,7 @@ import { DELETEcomment, POSTcomment } from '../../common/api/video';
 import { useUser } from '../../common/hooks/users';
 import { useVideo } from '../../common/hooks/videos';
 import Video from '../video/Video';
+import Canvas from './Canvas';
 
 const VcommentPost = () => {
     const { id: videoId } = useParams();
@@ -13,6 +14,10 @@ const VcommentPost = () => {
 
     return (
         <div>
+            <div>hi</div>
+            <div>
+                <Canvas />
+            </div>
             <div className='mb-3'>
                 <Video video={video} properties={{ clickable: false, controls: true }} />
             </div>
