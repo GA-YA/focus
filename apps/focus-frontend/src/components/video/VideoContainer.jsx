@@ -4,6 +4,7 @@ import CommentButton from '../buttons/commentButton/CommentButton';
 import LikeButton from '../buttons/likeButton/LikeButton';
 import UserNameHeader from '../shared/userNameHeader/UserNameHeader';
 import Video from './Video';
+import VCommentButton from '../buttons/vCommentButton/VCommentButton';
 
 const VideoContainer = ({
     user,
@@ -20,6 +21,7 @@ const VideoContainer = ({
                     <Video video={video} properties={properties.controls} />
                     <div className='position-relative'>
                         <div className='position-absolute end-0'>
+                            {properties.commentBtn && <VCommentButton video={video} />}
                             {properties.commentBtn && <CommentButton video={video} />}
                             {properties.likeBtn && <LikeButton video={video} setVideo={setVideo} />}
                         </div>
