@@ -13,7 +13,7 @@ const VCommentButton = ({ video }) => {
 
     return (
         <Button className='me-3 border' variant='light' size='lg' onClick={handleClick}>
-            <BsEasel /> {commentsCounter}
+            <BsEasel />
         </Button>
     );
 };
