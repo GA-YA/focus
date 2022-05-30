@@ -2,9 +2,8 @@ import React from 'react';
 import useCanvas from '../../common/hooks/canvas';
 
 const Canvas = (props) => {
-    const { draw, options, ...rest } = props;
-    const { context, ...moreConfig } = options;
-    const canvasRef = useCanvas(draw, { context });
+    const { draw, ...rest } = props;
+    const canvasRef = useCanvas(draw);
 
     return <canvas ref={canvasRef} {...rest} />;
 };
